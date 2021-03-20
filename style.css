@@ -1,0 +1,65 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: monospace;
+  height: 100%;
+  overflow: hidden;
+}
+
+.settings-box {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 200px;
+  height: 200px;
+}
+
+.settings-box:hover #settings {
+  display: block;
+}
+
+#settings {
+  padding: 10px 40px;
+  margin: 10px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.76);
+  width: max-content;
+  border-radius: 40px;
+}
+
+#settings:hover {
+  display: block;
+}
+
+#noise {
+  width: 100%;
+  height: 100%;
+}
+
+.slider {
+  display: flex;
+  padding: 14px 0;
+  width: 100%;
+  border-bottom: 1px solid rgba(244, 204, 200, 0.1);
+}
+.slider:last-child {
+  border: 0;
+}
+
+.slider label {
+  color: white;
+  width: 200px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.slider input {
+  width: 500px;
+}
