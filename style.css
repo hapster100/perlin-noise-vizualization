@@ -10,32 +10,40 @@ html, body {
   overflow: hidden;
 }
 
-.settings-box {
+.settings__open-btn {
+  cursor: pointer;
   position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 200px;
-  height: 200px;
-}
-
-.settings-box:hover #settings {
-  display: block;
-}
-
-#settings {
-  padding: 10px 40px;
-  margin: 10px;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  display: none;
+  top: -40px;
+  left: 0;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.76);
-  width: max-content;
-  border-radius: 40px;
+  border: 0;
+  height: 40px;
+  border-radius: 20px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#settings:hover {
-  display: block;
+.settings__icon {
+  height: 90%;
+}
+
+.settings {
+  position: absolute;
+  padding: 10px 40px;
+  right: 50%;
+  bottom: 0;
+  transform: translate(50%, 100%);
+  background-color: rgba(0, 0, 0, 0.76);
+  max-width: calc(100vw - 20px);
+  transition: all 0.2s;
+}
+
+.settings--show {
+  transform: translate(50%, 0);
 }
 
 #noise {
@@ -60,6 +68,45 @@ html, body {
   font-weight: bold;
 }
 
-.slider input {
-  width: 500px;
+@media screen and (min-width: 800px) {
+  
+  .settings {
+    visibility: hidden;
+    transform: none;
+    transition: none;
+    border-radius: 20px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .settings:hover {
+    visibility: visible;
+  }
+
+  .settings__icon {
+    height: 80%;
+  }
+
+  .settings:hover .settings__open-btn {
+    background-color: transparent;
+    color: transparent;
+  }
+
+  .settings:hover .settings__icon {
+    display: none;
+  }
+
+  .settings__open-btn {
+    visibility: visible;
+    cursor: unset;
+    position: absolute;
+    top: unset;
+    bottom: 0;
+    right: 0;
+    left: unset;
+    height: 80px;
+    width: 80px;
+    background-color: rgba(0, 0, 0, 0.76);
+    border-radius: 20px;
+  }
 }

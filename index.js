@@ -7,16 +7,15 @@ c.height = 500
 c.width = document.body.clientWidth / document.body.clientHeight * c.height
 
 const settings = {
-  dt: 0.02,
-  aProc: 0.02,
-  dy: 20,
-  dx: 1,
-  amplitude: 30,
-  offy: -0.5,
+  dt: 1,
+  aProc: 0.01,
+  dy: 10,
+  amplitude: 10,
+  offy: -0.1,
   yScale: 5,
-  xScale: 5,
-  ySpeed: 5,
-  xSpeed: 5
+  xScale: 2,
+  ySpeed: 0.2,
+  xSpeed: 0.1
 }
 
 let noise = new SimplexNoise()
@@ -44,7 +43,7 @@ const drawNoise = (offsety = 0) => {
     )
     
     cc.beginPath()
-    for(let i = 0 ; i < c.width + settings.dx; i+=settings.dx) {
+    for(let i = 0 ; i < c.width; i++) {
       let h = noise.noise(xPos + i / c.width * settings.xScale, yPos + j / c.height * settings.yScale)
       
       cc.lineTo(i, h * settings.amplitude + j)  
@@ -66,25 +65,44 @@ const drawNoise = (offsety = 0) => {
 
 const settingsNode = document.getElementById('settings')
 
-const dtSlider = new Slider(0, 0.1, 'T step', settings.dt, v => settings.dt = v)
-const dySlider = new Slider(2, 400, 'Y step', settings.dy, v => settings.dy = v)
-const dxSlider = new Slider(1, 10, 'X step', settings.dx, v => settings.dx = v)
-const ysSlider = new Slider(1, 70, 'Y scale', settings.yScale, v => settings.yScale = v)
-const xsSlider = new Slider(1, 70, 'X scale', settings.xScale, v => settings.xScale = v)
-const yspSlider = new Slider(1, 70, 'Y speed', settings.ySpeed, v => settings.ySpeed = v)
-const xspSlider = new Slider(1, 70, 'X speed', settings.xSpeed, v => settings.xSpeed = v)
+const dtSlider = new Slider(0, 1, 'dT', settings.dt, v => settings.dt = v)
+const xspSlider = new Slider(-1, 1, 'dX', settings.xSpeed, v => settings.xSpeed = v)
+const yspSlider = new Slider(-1, 1, 'dY', settings.ySpeed, v => settings.ySpeed = v)
+const dySlider = new Slider(2, 50, 'Gap', settings.dy, v => settings.dy = v)
+const amplSlider = new Slider(1, 10, 'Amp', settings.amplitude, v => settings.amplitude = v)
+
+const xsSlider = new Slider(1, 20, 'X Rng', settings.xScale, v => settings.xScale = v)
+const ysSlider = new Slider(1, 20, 'Y Rng', settings.yScale, v => settings.yScale = v)
+
+const scanSlider = new Slider(-0.1, 0.1, 'Scan', settings.offy, v => settings.offy = v)
 const aSlider = new Slider(0, 0.1, 'Alpha', settings.aProc, v => settings.aProc = v)
-const scanSlider = new Slider(-1, 1, 'Y Speed', settings.offy, v => settings.offy = v)
-const amplSlider = new Slider(1, 100, 'Amplitude', settings.amplitude, v => settings.amplitude = v)
-const lwSlider = new Slider(1, 10, 'Line Width', 1, v => cc.lineWidth = v)
+const lwSlider = new Slider(1, 10, 'Width', 1, v => cc.lineWidth = v)
+
+const openSettingButton = document.createElement('button')
+openSettingButton.classList.add('settings__open-btn')
+
+const settingsIcon = document.createElement('img')
+settingsIcon.src = 'settings.svg'
+settingsIcon.classList.add('settings__icon')
+
+openSettingButton.appendChild(settingsIcon)
+
+openSettingButton.onclick = () => {
+  if (settingsNode.classList.contains('settings--show')) {
+    settingsNode.classList.remove('settings--show')
+  } else {
+    settingsNode.classList.add('settings--show')
+  }
+}
 
 settingsNode.appendChild(dtSlider.node)
+settingsNode.appendChild(xspSlider.node)
+settingsNode.appendChild(yspSlider.node)
 settingsNode.appendChild(dySlider.node)
-settingsNode.appendChild(dxSlider.node)
+
+settingsNode.appendChild(openSettingButton)
 settingsNode.appendChild(ysSlider.node)
 settingsNode.appendChild(xsSlider.node)
-settingsNode.appendChild(yspSlider.node)
-settingsNode.appendChild(xspSlider.node)
 settingsNode.appendChild(aSlider.node)
 settingsNode.appendChild(scanSlider.node)
 settingsNode.appendChild(amplSlider.node)
