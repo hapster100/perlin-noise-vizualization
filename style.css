@@ -33,13 +33,19 @@ html, body {
 
 .settings {
   position: absolute;
-  padding: 10px 40px;
   right: 50%;
   bottom: 0;
   transform: translate(50%, 100%);
   background-color: rgba(0, 0, 0, 0.76);
   max-width: calc(100vw - 20px);
   transition: all 0.2s;
+}
+
+.settings__scroll {
+  padding: 10px 40px;
+  height: 100%;
+  overflow-y: scroll;
+  max-height: calc(100vh - 50px);
 }
 
 .settings--show {
@@ -68,7 +74,7 @@ html, body {
   font-weight: bold;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 900px) {
   
   .settings {
     visibility: hidden;

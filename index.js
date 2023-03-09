@@ -64,6 +64,8 @@ const drawNoise = (offsety = 0) => {
 }
 
 const settingsNode = document.getElementById('settings')
+const wrapper = document.createElement('div')
+wrapper.classList.add('settings__scroll')
 
 const dtSlider = new Slider(0, 1, 'dT', settings.dt, v => settings.dt = v)
 const xspSlider = new Slider(-1, 1, 'dX', settings.xSpeed, v => settings.xSpeed = v)
@@ -95,18 +97,19 @@ openSettingButton.onclick = () => {
   }
 }
 
-settingsNode.appendChild(dtSlider.node)
-settingsNode.appendChild(xspSlider.node)
-settingsNode.appendChild(yspSlider.node)
-settingsNode.appendChild(dySlider.node)
+wrapper.appendChild(dtSlider.node)
+wrapper.appendChild(xspSlider.node)
+wrapper.appendChild(yspSlider.node)
+wrapper.appendChild(dySlider.node)
+wrapper.appendChild(ysSlider.node)
+wrapper.appendChild(xsSlider.node)
+wrapper.appendChild(aSlider.node)
+wrapper.appendChild(scanSlider.node)
+wrapper.appendChild(amplSlider.node)
+wrapper.appendChild(lwSlider.node)
 
 settingsNode.appendChild(openSettingButton)
-settingsNode.appendChild(ysSlider.node)
-settingsNode.appendChild(xsSlider.node)
-settingsNode.appendChild(aSlider.node)
-settingsNode.appendChild(scanSlider.node)
-settingsNode.appendChild(amplSlider.node)
-settingsNode.appendChild(lwSlider.node)
+settingsNode.appendChild(wrapper)
 
 cc.fillRect(0, 0, c.width, c.height)
 setTimeout(drawNoise, 0)
